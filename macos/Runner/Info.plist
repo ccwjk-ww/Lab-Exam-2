@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ⚠️ นี่คือ KEY ที่ต้องเพิ่มเข้าไปใน ios/Runner/Info.plist
+  ต้องใส่ภายใน <dict> หลักของไฟล์
+
+  หากไม่มี key เหล่านี้ → แอปจะ CRASH ทันทีเมื่อกด Gallery หรือ Camera บน iOS จริง
+  และ Simulator จะ throw exception ที่ไม่มี error message ชัดเจน
+-->
+
+<!--
+  เปิดไฟล์: ios/Runner/Info.plist
+  หา tag </dict> สุดท้าย แล้ว paste content ด้านล่างก่อน </dict> นั้น
+-->
+
+    <!-- ✅ สิทธิ์เข้าถึง Photo Library (Gallery) — จำเป็นสำหรับ image_picker -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>แอปต้องการเข้าถึงรูปภาพเพื่อแนบใบเสร็จ</string>
+
+    <!-- ✅ สิทธิ์เข้าถึงกล้อง — จำเป็นถ้าใช้ ImageSource.camera -->
+    <key>NSCameraUsageDescription</key>
+    <string>แอปต้องการใช้กล้องเพื่อถ่ายรูปใบเสร็จ</string>
+
+    <!-- ✅ สิทธิ์บันทึกรูปลง Photo Library (ถ้าจะ save รูป) -->
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>แอปต้องการบันทึกรูปใบเสร็จลงในคลังรูปภาพ</string>
+
+<!--
+  ════════════════════════════════════════════════════════════
+  วิธีตรวจสอบว่ามีครบแล้ว:
+  1. เปิด ios/Runner/Info.plist ด้วย text editor
+  2. ค้นหาคำว่า NSPhotoLibraryUsageDescription
+  3. ถ้าไม่เจอ → paste key ด้านบนเข้าไปก่อน tag </dict> สุดท้าย
+
+  หลังจากเพิ่มแล้ว:
+  - flutter clean
+  - flutter pub get
+  - flutter run (re-install app บน simulator/device)
+  ════════════════════════════════════════════════════════════
+
+  ตัวอย่าง Info.plist ที่ถูกต้อง:
+  ─────────────────────────────────
+  <?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" ...>
+  <plist version="1.0">
+  <dict>
+      <key>CFBundleName</key>
+      <string>YourApp</string>
+      ... (keys อื่นๆ) ...
+
+      <key>NSPhotoLibraryUsageDescription</key>
+      <string>แอปต้องการเข้าถึงรูปภาพเพื่อแนบใบเสร็จ</string>
+
+      <key>NSCameraUsageDescription</key>
+      <string>แอปต้องการใช้กล้องเพื่อถ่ายรูปใบเสร็จ</string>
+
+      <key>NSPhotoLibraryAddUsageDescription</key>
+      <string>แอปต้องการบันทึกรูปใบเสร็จลงในคลังรูปภาพ</string>
+  </dict>
+  </plist>
+-->
